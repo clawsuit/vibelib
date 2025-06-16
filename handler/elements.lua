@@ -158,7 +158,7 @@ function uiElement:setSize(w, h, offW, offH)
         return
     else
         if self.parent then
-            if self.type == 'uiCheckbox' or self.type == 'uiIcon' then
+            if self.type == 'uiCheckbox' or (self.type == 'uiIcon' and self.circle) then
                 self.w = self:calc(py, w) 
                 self.h = self:calc(py, h)
             elseif self.type == 'uiSlider' or self.type == 'uiScroll' then
