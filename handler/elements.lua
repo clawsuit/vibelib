@@ -28,7 +28,7 @@ function uiElement:destroy(byParent)
         end 
     end
 
-    for i, v in ipairs({'svg', 'svg2', 'renderTarget', 'renderTarget2', 'shader'}) do
+    for i, v in ipairs({'svg', 'svg2', 'renderTarget', 'renderTarget2', 'shader', 'image'}) do
         if isElement(self[v]) then
             self[v]:destroy()
             self[v] = nil
