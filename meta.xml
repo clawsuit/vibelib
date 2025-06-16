@@ -1,0 +1,58 @@
+<meta>
+    <info author="ClawSuit" name="Vibe-Library" type="script" version="1.5.3"/>
+    <oop>true</oop>
+
+	<min_mta_version client='1.6.0-9.22408'/>
+
+    <!-- 
+        * Creators *
+        - ClawSuit
+
+        * Patner *
+        - ElRetutupapa
+
+        * Colaborators *
+        - ZeDDiTo
+    -->
+
+    <file src="files/fx/rounded.fx"/>
+    <file src="files/fx/hud_mask.fx" />
+    <file src="files/fx/tex_matrix.fx" />
+    <file src="files/fx/shader_tabs.fx" />
+
+    <file src="files/fonts/*.ttf" />
+    <file src="files/**/*.png" />
+    
+    <script src="utils/usecfulls.lua" type="client"/>
+
+    <script src="handler/definition.lua" type="client"/>
+    <script src="handler/elements.lua" type="client"/>
+    <script src="handler/events.lua" type="client"/>
+    <script src="handler/exports.lua" type="client"/>
+    
+    <!-- Si lo hacemos con el "*.lua", no detecta las variables globales -->
+    <script src="elements/window.lua" type="client"/>
+    <script src="elements/label.lua" type="client"/>
+    <script src="elements/button.lua" type="client"/>
+    <script src="elements/editbox.lua" type="client"/>
+    <script src="elements/colorpicker.lua" type="client"/>
+    <script src="elements/switch.lua" type="client"/>
+    <script src="elements/checkbox.lua" type="client"/>
+    <script src="elements/radiobutton.lua" type="client"/>
+    <script src="elements/slider.lua" type="client"/>
+    <script src="elements/progress.lua" type="client"/>
+    <script src="elements/treeview.lua" type="client"/>
+    <script src="elements/combobox.lua" type="client"/>
+    <script src="elements/scrollpane.lua" type="client"/>
+    <script src="elements/scroll.lua" type="client"/>
+    <script src="elements/gridlist.lua" type="client"/>
+    <script src="elements/tabpanel.lua" type="client"/>
+    <script src="elements/tab.lua" type="client"/>
+    <script src="elements/icon.lua" type="client"/>
+    <script src="elements/memo.lua" type="client"/>
+
+    <script src="examples.lua" type="client"/>
+
+    <export function='getLibrary' type='client'/>
+</meta>
+
