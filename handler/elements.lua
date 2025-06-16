@@ -97,7 +97,7 @@ end
 
 function uiElement:isCursorOver(position)
     if isCursorShowing() then
-        
+         
         local cursor = self:getCursor()
         local x, y = self:getRealXY()
         --
@@ -115,9 +115,9 @@ function uiElement:isCursorOver(position)
             local cw = self.cw
 
             if self.vertical then
-                return (cursor.x >= x and cursor.x <= x+cw) and (cursor.y >= y+self.cx and cursor.y <= y+self.cx+cw) 
+                return (cursor.x >= x and cursor.x <= x+cw) and (cursor.y >= math.min(y+self.h-cw, y+self.cx) and cursor.y <= y+self.cx+cw) 
             else
-                return (cursor.x >= x+self.cx and cursor.x <= x+self.cx+cw) and (cursor.y >= y and cursor.y <= y+cw)
+                return (cursor.x >= math.min(x+self.w-cw, x+self.cx) and cursor.x <= x+self.cx+cw) and (cursor.y >= y and cursor.y <= y+cw)
             end
         end
     end
