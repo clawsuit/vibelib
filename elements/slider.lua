@@ -48,9 +48,9 @@ function uiSlider:dx(tick)
     local cw = self.cw
     local px, py = (x+self.cx), (y+(h-cw)/2 - 1)
 
- 	if self.vertical then
- 		px, py = (x+(w-cw)/2 - 1), (y+self.cx)
- 	end
+    if self.vertical then
+        px, py = (x+(w-cw)/2 - 1), (y+self.cx)
+    end
 
     dxDrawImage(x, y, w, h, self.svg, 0, 0, 0, self.backgroundColor)
 
@@ -64,7 +64,7 @@ function uiSlider:dx(tick)
    
     dxDrawImage(px, py, cw, cw, self.svg2, 0, 0, 0, self.circleColor)
 
-   	if self:isCursorOver('circleSlider') and click then
+    if self:isCursorOver('circleSlider') and click then
         local cancel
         if self.onClick then
             cancel = self:onClick('left', 'down')
@@ -72,20 +72,20 @@ function uiSlider:dx(tick)
         end
 
         if not self.onClick or cancel ~= false then
-			self.movePos = self:getCursor()
-		end
-   	end
+            self.movePos = self:getCursor()
+        end
+    end
 
     if self:isCursorOver('circleSlider') and not self.click and self.pre then
         self:onClick('left', 'up')
         self.pre = nil
     end
 
-   	if not self.click and self.movePos then
-   		self.movePos = nil
-   	end
+    if not self.click and self.movePos then
+        self.movePos = nil
+    end
 
-   	if self.move then
+    if self.move then
         if self.movePos then
 
             local cursor = self:getCursor()
@@ -93,16 +93,26 @@ function uiSlider:dx(tick)
 
             if self.vertical then
                 local cx = math.max(0, math.min(self.cx + cursor.y, h-cw))
+                local cancel
+
                 if self.onChange and self.cx ~= cx then
-                    self:onChange(self:getProgress())
+                    cancel = self:onChange(self:getProgress())
                 end
-            	self.cx = cx
+                
+                if not cancel then
+                   self.cx = cx
+                end
             else
                 local cx = math.max(0, math.min(self.cx + cursor.x, w-cw))
+                local cancel
+
                 if self.onChange and self.cx ~= cx then
-                    self:onChange(self:getProgress())
+                    cancel = self:onChange(self:getProgress())
                 end
-            	self.cx = cx
+                
+                if not cancel then
+                   self.cx = cx
+                end
             end
 
             self.movePos = self:getCursor()
@@ -112,11 +122,11 @@ function uiSlider:dx(tick)
 end
 
 function uiSlider:getProgress()
-	return self.cx/((self.vertical and self.h or self.w)-(self.cw))
+    return self.cx/((self.vertical and self.h or self.w)-(self.cw))
 end
 
 function uiSlider:setProgress(pos)
-	self.cx = pos*((self.vertical and self.h or self.w)-(self.cw))
+    self.cx = pos*((self.vertical and self.h or self.w)-(self.cw))
 end
 
 
