@@ -2,7 +2,7 @@ uiElement = Class()
 
 function uiElement:virtual_constructor()
 
-	dxLibrary.count = dxLibrary.count + 1
+    dxLibrary.count = dxLibrary.count + 1
     self.id = dxLibrary.count
     --
     self.visible = true
@@ -86,7 +86,11 @@ function uiElement:destroy(byParent)
         end
     end
 
-    self = nil
+    for k, _ in pairs(self) do
+        self[k] = nil
+    end
+
+    setmetatable(self, nil)
 end
 
 function uiElement:getCursor()
