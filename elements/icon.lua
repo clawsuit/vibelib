@@ -35,6 +35,16 @@ function uiIcon:dx()
     local w, h, x, y = self.w, self.h, self:getRealXY()
 
     dxDrawImage(x, y, w, h, (self.shader or self.image), self.rotation[1], self.rotation[2], self.rotation[3], self.backgroundColor, false)
+
+    if #self.childs > 0 then
+        for i, class in ipairs(self.childs) do
+            if class then  
+                if class.visible then
+                    class:dx(getTickCount())
+                end
+            end
+        end
+    end 
 end
 
 function uiIcon:addMask(texture)
