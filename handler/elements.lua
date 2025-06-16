@@ -19,6 +19,10 @@ end
 function uiElement:destroy(byParent)
     self.visible = false
 
+    if self.onDestroy then
+        self:onDestroy()
+    end
+
     if self.childs then
         for i = #self.childs, 1, -1 do
             local v = self.childs[i]
