@@ -80,8 +80,8 @@ function uiTabpanel:dx ()
             if self.vertical then
                 if isCursorOver(x - widthUsed, startY, widthUsed, heightUsed) and click then
                     local cancel
-                    if self.onClick then
-                        cancel = self:onClick('left', 'down')
+                    if self.onChange then
+                        cancel = self:onChange(self.selectTab, v)
                     end
                     if not cancel and self.selectTab ~= v then
                         self.previousTab = self.selectTab
@@ -92,8 +92,8 @@ function uiTabpanel:dx ()
             else
                 if isCursorOver(startX, y - tabHeight, widthUsed, tabHeight) and click then
                     local cancel
-                    if self.onClick then
-                        cancel = self:onClick('left', 'down')
+                    if self.onChange then
+                        cancel = self:onChange(self.selectTab, v)
                     end
                     if not cancel and self.selectTab ~= v then
                         self.previousTab = self.selectTab
