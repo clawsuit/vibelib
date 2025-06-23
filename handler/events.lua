@@ -42,7 +42,7 @@ function dxLibrary.global_click(button, state, aX, aY)
 					cancel = self:onClick(button, state)
 				end
 
-				if not self.onClick or cancel ~= false then
+				if not cancel then
 
 					if button == 'left' then
 
