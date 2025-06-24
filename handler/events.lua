@@ -81,7 +81,7 @@ function dxLibrary.global_click(button, state, aX, aY)
 								local group = dxLibrary.radioButtonGroups[self.groupKey]
 
 								if group.state and group.state ~= self then
-									group.state:setState(false)
+									--group.state:setSelected(false)
 								end
 								
 								group.state = self
