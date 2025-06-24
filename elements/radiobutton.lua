@@ -78,11 +78,6 @@ end
 
 function uiRadioButton:setSelected()
     local group = dxLibrary.radioButtonGroups[self.groupKey]
-
-    if group.state and group.state ~= self then
-        group.state:setState(false)
-    end
-    
     group.state = self
 end
 
