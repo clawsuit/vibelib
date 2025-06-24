@@ -60,27 +60,32 @@ end
 
 function uiMemo:splitLines(text)
     local lines = {}
-    for line in text:gmatch("[^\r\n]+") do
+    for line in text:gmatch("([^\r\n]*)[\r\n]?") do
+        if string.match(line, "^%s*$") then
+            table.insert(lines, '')
+        else
+            if dxGetTextWidth(line, 1, self.font) > self.w + self.padding * 2 and #line > 1 then
 
-        if dxGetTextWidth(line, 1, self.font) > self.w + self.padding * 2 then
+                local new = ''
+                for i = 1, #line do
+                    local k = line:sub(i,i)
 
-            local new = ''
-            for i = 1, #line do
-                local k = line:sub(i,i)
+                    if dxGetTextWidth(new..k, 1, self.font) > self.w + self.padding * 2 then
+                        table.insert(lines, new)
+                        new = ''
+                    end
 
-                if dxGetTextWidth(new..k, 1, self.font) > self.w + self.padding * 2 then
-                    table.insert(lines, new)
-                    new = ''
+                    new = new..k
                 end
 
-                new = new..k
+                table.insert(lines, new)
+            else
+                table.insert(lines, line)
             end
-
-            table.insert(lines, new)
-        else
-            table.insert(lines, line)
         end
     end
+    table.remove(lines)
+    --iprint(lines)
     return lines
 end
 
