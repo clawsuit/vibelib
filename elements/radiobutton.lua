@@ -76,16 +76,19 @@ function uiRadioButton:dx ()
     end
 end
 
-function uiRadioButton:setState(newState)
-    if newState then
-        local group = dxLibrary.radioButtonGroups[self.groupKey]
+function uiRadioButton:setSelected()
+    local group = dxLibrary.radioButtonGroups[self.groupKey]
 
-        if group.state and group.state ~= self then
-            group.state:setState(false)
-        end
-        
-        group.state = self
+    if group.state and group.state ~= self then
+        group.state:setState(false)
     end
+    
+    group.state = self
+end
+
+function uiRadioButton:getSelected()
+    local group = dxLibrary.radioButtonGroups[self.groupKey]
+    return group.state and group.state == self 
 end
 
 
