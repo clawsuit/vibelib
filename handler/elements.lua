@@ -223,7 +223,11 @@ end
 
 function uiElement:centerX(x, offX)
     local px = self:getReferenceSize()
-    self.x = (px-self.w) / 2 + self:calc(px, (x or 0)) + (offX or 0)
+    if self.type == 'uiProgress' and self.mode == 1 then
+        self.x = px/2-(self.rounded+math.pi*2) + self:calc(px, (x or 0)) + (offX or 0)
+    else
+        self.x = (px-self.w) / 2 + self:calc(px, (x or 0)) + (offX or 0)
+    end
 end
 
 function uiElement:centerY(y, offY)
@@ -343,7 +347,7 @@ function uiElement:updateSvg()
     if self.type == 'uiWindow' then
 
         if isElement(self.svg) then
-            self.svg:destroy()
+            destroyElement(self.svg)
         end
 
         local r1, r2, r3, r4 = self.rounded[1] or 0, self.rounded[2] or 0, self.rounded[3] or 0, self.rounded[4] or 0
@@ -379,7 +383,7 @@ function uiElement:updateSvg()
     elseif self.type == 'uiButton' then
 
         if isElement(self.svg) then
-            self.svg:destroy()
+            destroyElement(self.svg)
         end
 
         local w, h = self.w, self.h
@@ -397,11 +401,11 @@ function uiElement:updateSvg()
     elseif self.type == 'uiColorpicker' then
 
         if isElement(self.svg) then
-            self.svg:destroy()
+            destroyElement(self.svg)
         end
 
         if isElement(self.svg2) then
-            self.svg2:destroy()
+            destroyElement(self.svg2)
         end
 
         local w, h = self.w, self.h/ 1.65
@@ -431,7 +435,7 @@ function uiElement:updateSvg()
     elseif self.type == 'uiCheckbox' then
         
         if isElement(self.svg) then
-            self.svg:destroy()
+            destroyElement(self.svg)
         end
 
         local w, h = self.w, self.h
@@ -447,11 +451,11 @@ function uiElement:updateSvg()
     elseif self.type == 'uiRadioButton' then
         
         if isElement(self.svg) then
-            self.svg:destroy()
+            destroyElement(self.svg)
         end
 
         if isElement(self.svg2) then
-            self.svg2:destroy()
+            destroyElement(self.svg2)
         end
 
         -- local rawSvgData = ([[
@@ -483,7 +487,7 @@ function uiElement:updateSvg()
     elseif self.type == 'uiSlider' then
 
         if isElement(self.svg) then
-            self.svg:destroy()
+            destroyElement(self.svg)
         end
 
         local w, h = self.w, self.h
@@ -512,11 +516,11 @@ function uiElement:updateSvg()
     elseif self.type == 'uiProgress' then
 
         if isElement(self.svg) then
-            self.svg:destroy()
+            destroyElement(self.svg)
         end
 
         if isElement(self.svg2) then
-            self.svg2:destroy()
+            destroyElement(self.svg2)
         end
 
         local w, h = self.w, self.h
@@ -562,11 +566,11 @@ function uiElement:updateSvg()
     elseif self.type == 'uiScroll' then
 
         if isElement(self.svg) then
-            self.svg:destroy()
+            destroyElement(self.svg)
         end
 
         if isElement(self.svg2) then
-            self.svg:destroy()
+            destroyElement(self.svg2)
         end
  
         local w, h = self.w, self.h
@@ -599,7 +603,7 @@ function uiElement:updateSvg()
     elseif self.type == 'uiEditbox' then
 
         if isElement(self.svg) then
-            self.svg:destroy()
+            destroyElement(self.svg)
         end
 
         local w, h = self.w, self.h
@@ -616,7 +620,7 @@ function uiElement:updateSvg()
     elseif self.type == 'uiMemo' then
 
         if isElement(self.svg) then
-            self.svg:destroy()
+            destroyElement(self.svg)
         end
 
         local w, h = self.w, self.h
