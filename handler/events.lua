@@ -1,6 +1,6 @@
 local lastClickTime = 0
 
-dxLibrary.events = {'onClick', 'onChange', 'onEnter', 'onLeave'}
+dxLibrary.events = {'onClick', 'onChange', 'onHover'}
 
 dxLibrary.restoreTarget = {}
 dxLibrary.mouseWheels = {}

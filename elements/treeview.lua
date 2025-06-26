@@ -50,6 +50,20 @@ function uiTreeview:dx()
         currentY = self:renderNode(node, x, (currentY or py), click, 0, px, py, isScrollpane)
     end
 
+    if self:isCursorOver() then
+        if not self.isOver then
+            if self.onHover then
+                self:onHover('enter')
+            end
+            self.isOver = true 
+        end
+    elseif self.isOver then
+        if self.onHover then
+            self:onHover('leave')
+        end
+        self.isOver = nil
+    end
+
     self.click = getKeyState('mouse1')
 end
 

@@ -111,6 +111,20 @@ function uiSlider:dx(tick)
 
         end
     end
+
+    if self:isCursorOver() or self:isCursorOver('circleSlider') then
+        if not self.isOver then
+            if self.onHover then
+                self:onHover('enter')
+            end
+            self.isOver = true 
+        end
+    elseif self.isOver then
+        if self.onHover then
+            self:onHover('leave')
+        end
+        self.isOver = nil
+    end
 end
 
 function uiSlider:getProgress()

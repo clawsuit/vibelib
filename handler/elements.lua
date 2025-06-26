@@ -117,7 +117,7 @@ function uiElement:isCursorOver(position)
 
             local max = math.max(math.max(self.rounded[1], self.rounded[2]), math.max(self.rounded[3], self.rounded[4])) / 4 + 2
             local fw, fh = self.closeW, math.min( self.closeH, self:calc(self.h, 5)+max)
-            return (cursor.x >= x+self.w-max-self.closeW*1.5 and cursor.x <= (x+self.w-max-self.closeW*1.5)+self.closeW) and (cursor.y >= y+fh and cursor.y <= (y+fh)+self.closeH)
+            return (cursor.x >= x+self.w-max-self.closeW*1.5 and cursor.x <= (x+self.w-max-self.closeW*1.5)+self.closeW) and (cursor.y >= y+1 and cursor.y <= (y+1)+self.titleH*2)
 
         elseif position == 'circleSlider' then
             local cw = self.cw
@@ -359,14 +359,19 @@ function uiElement:updateSvg()
                 <rect x="%s" y="%s" rx="%s" opacity="1" width="%s" height="%s" fill="%s" stroke-width="%s" stroke="%s" />
                 <rect x="%s" y="%s" rx="%s" opacity="1" width="%s" height="%s" fill="%s" stroke-width="%s" stroke="%s" />
                 <rect x="%s" y="%s" rx="%s" opacity="1" width="%s" height="%s" fill="%s" stroke-width="%s" stroke="%s" />
+                <rect x="%s" y="%s" rx="%s" opacity="1" width="%s" height="%s" fill="%s" stroke-width="%s" stroke="%s" />
+                <rect x="%s" y="%s" rx="%s" opacity="1" width="%s" height="%s" fill="%s" stroke-width="%s" stroke="%s" />
                 
                 <rect x="%s" y="%s" opacity="1" width="%s" height="%s" fill="%s" stroke-width="%s" stroke="%s" />
             </svg>
         ]], 
             w+4+self.outline.size, h+4+self.outline.size, 
-            --self.backgroundTitle, self.backgroundColo
+
             2+self.outline.size, 2+self.outline.size, r1, w*.7, h/2, color2hex(self.backgroundTitle), self.outline.size, color2hex(self.outline.color), -- title left
             2+self.outline.size+w/2, 2+self.outline.size, r2, w/2, h/2, color2hex(self.backgroundTitle), self.outline.size, color2hex(self.outline.color), -- title right
+
+            2+self.outline.size, 2+self.outline.size+(self.titleH*1.8), 0, w*.7, h/2, color2hex(self.backgroundColor), self.outline.size, color2hex(self.outline.color), -- down title left
+            2+self.outline.size+w/2, 2+self.outline.size+(self.titleH*1.8), 0, w/2, h/2, color2hex(self.backgroundColor), self.outline.size, color2hex(self.outline.color), -- down title right
 
             2+self.outline.size, 2+self.outline.size+h/2, r3, w*0.7, h/2, color2hex(self.backgroundColor), self.outline.size, color2hex(self.outline.color), --- left down
             (2+self.outline.size+w/2), 2+self.outline.size+h/2, r4, w/2, h/2, color2hex(self.backgroundColor), self.outline.size, color2hex(self.outline.color),--,

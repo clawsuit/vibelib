@@ -315,7 +315,21 @@ function uiMemo:dx()
                 end
             end
         end
-    end 
+    end
+
+    if self:isCursorOver() then
+        if not self.isOver then
+            if self.onHover then
+                self:onHover('enter')
+            end
+            self.isOver = true 
+        end
+    elseif self.isOver then
+        if self.onHover then
+            self:onHover('leave')
+        end
+        self.isOver = nil
+    end
 end
 
 function uiMemo:updateTextFromLines()

@@ -67,6 +67,20 @@ function uiLabel:dx (tick)
     else
         dxDrawText2(self.text, x, y, w, h, (self.textColor or Color.text), self.scale, self.font, self.alignX, self.alignY, self.clip, self.wordBreak, self.postGUI, self.colorCoded)
     end
+
+    if self:isCursorOver() then
+        if not self.isOver then
+            if self.onHover then
+                self:onHover('enter')
+            end
+            self.isOver = true 
+        end
+    elseif self.isOver then
+        if self.onHover then
+            self:onHover('leave')
+        end
+        self.isOver = nil
+    end
 end
 
 function uiLabel:setShadow(r, r2, c)

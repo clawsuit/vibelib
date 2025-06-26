@@ -33,7 +33,7 @@ function uiProgress:constructor(array)--x, y, w, h, parent, mode, rounded, backg
     elseif self.mode == 2 then
         self.rounded = array.rounded or 5
     end
-
+ 
  --iprint(self.x, self.y, self.w, self.h)
     self:updateSvg()
 
@@ -60,6 +60,20 @@ function uiProgress:dx(tick)
 
     if self.mode == 2 then
         dxDrawImageSection(x, y, w*self.progress, h, 0, 0, w*self.progress, h, self.svg2)
+    end
+
+    if self:isCursorOver() then
+        if not self.isOver then
+            if self.onHover then
+                self:onHover('enter')
+            end
+            self.isOver = true 
+        end
+    elseif self.isOver then
+        if self.onHover then
+            self:onHover('leave')
+        end
+        self.isOver = nil
     end
 end
 

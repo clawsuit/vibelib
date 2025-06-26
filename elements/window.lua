@@ -12,7 +12,7 @@ function uiWindow:constructor(array)--x, y, w, h, text, rounded, close, backgrou
     self:adjustPosition()
 
     self.text = array.text or ''
-    self.textAlign = 'center'
+    self.textAlign = {array.alignX or 'center', array.alignY or 'center'}
 
     self.closebutton = (array.close == nil and true) or array.close
 
@@ -75,12 +75,13 @@ function uiWindow:dx(tick)
 
     local max = math.max(math.max(self.rounded[1], self.rounded[2]), math.max(self.rounded[3], self.rounded[4])) / 4 + 2
     local fw, fh = self.closeW, math.min( self.closeH, self:calc(self.h, 5)+max)
-    --dxDrawRectangle(x+max, y, w-max*2, self.titleH, tocolor(255,0,0), false)
-    dxDrawText2(self.text, x+max+fw, y+max+fh, w-(max+fw)*2, self.titleH, self:gColor(self.textColor or Color.text), 1, self.font, self.textAlign, "top", false, false, false, false)
+
+    --dxDrawRectangle(x+max, y, w-max*2, self.titleH*2, tocolor(0,0,255), false)
+    dxDrawText2(self.text, x+max+fw, y+1, w-(max+fw)*2, self.titleH*2, self:gColor(self.textColor or Color.text), 1, self.font, self.textAlign[1], self.textAlign[2], false, false, false, false)
 
     if self.closebutton then
         --dxDrawRectangle(x+w-max-self.closeW*2, y+fh, self.closeW, self.closeH, tocolor(255,0,0))
-        dxDrawText2("X", x+w-max-self.closeW*1.5, y+fh, self.closeW, self.closeH, -1, 1, self.fontClose, "center", "top", false, false, false, false)
+        dxDrawText2("X", x+w-max-self.closeW*1.5, y+1, self.closeW, self.titleH*2, -1, 1, self.fontClose, "center", self.textAlign[2], false, false, false, false)
     end
 
     if #self.childs > 0 then
@@ -112,11 +113,26 @@ function uiWindow:dx(tick)
         self.movePos = nil
     end
 
+    if self:isCursorOver() then
+        if not self.isOver then
+            if self.onHover then
+                self:onHover('enter')
+            end
+            self.isOver = true 
+        end
+    elseif self.isOver then
+        if self.onHover then
+            self:onHover('leave')
+        end
+        self.isOver = nil
+    end
+
+
     self.click = getKeyState('mouse1')
 end
 
-function uiWindow:setTextAlign(alignment)
-    self.textAlign = alignment
+function uiWindow:setTextAlign(alignX, alignY)
+    self.textAlign = {alignX or 'center', alignY or 'bottom'}
 end
 
 function uiWindow:setOutline(size, color)

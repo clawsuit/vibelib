@@ -136,6 +136,20 @@ function uiColorpicker:dx ()
 
     self.color = self.degrade.color
     self.degrade.cursorState, self.spectrum.cursorState = getKeyState('mouse1'), getKeyState('mouse1')
+
+    if self:isCursorOver() then
+        if not self.isOver then
+            if self.onHover then
+                self:onHover('enter')
+            end
+            self.isOver = true 
+        end
+    elseif self.isOver then
+        if self.onHover then
+            self:onHover('leave')
+        end
+        self.isOver = nil
+    end
 end
 
 function uiColorpicker:getColor()
