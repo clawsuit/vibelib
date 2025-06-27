@@ -1,5 +1,5 @@
 # vibelib
 
-for use
+> for use
 
 loadstring(exports.vibelib:getLibrary())()
